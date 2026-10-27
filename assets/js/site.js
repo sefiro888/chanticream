@@ -97,23 +97,22 @@
     setTimeout(() => h.classList.add("sube-ok"), conIntro ? 5600 : 2600);
   });
 
-  /* ---------- WhatsApp: mensaje propio de cada página ---------- */
+  /* ---------- WhatsApp: discreto, con una frase propia de cada página ---------- */
   const wa = $("[data-wa]");
   if (wa) {
-    const burbuja = $(".wa__burbuja", wa), clave = `wa-visto-${wa.dataset.wa}`;
+    const boton = $(".wa-flot", wa), clave = `wa-tip-${wa.dataset.wa}`;
+    setTimeout(() => boton.classList.add("ver"), conIntro ? 4600 : 1200);
     let visto = false;
     try { visto = sessionStorage.getItem(clave) === "1"; } catch (e) {}
-    const guarda = () => { try { sessionStorage.setItem(clave, "1"); } catch (e) {} };
-    let cerrado = false;
-    const cierra = () => { cerrado = true; burbuja.hidden = true; wa.classList.remove("aviso"); guarda(); };
-    $(".wa__x", burbuja).addEventListener("click", cierra);
-    $$("a", wa).forEach((a) => a.addEventListener("click", cierra));
-    setTimeout(() => $(".wa-flot", wa).classList.add("ver"), 1200);
-    if (!visto) {
-      // primero el aviso rojo, luego el mensaje; solo una vez por página y visita
-      setTimeout(() => { if (!cerrado) wa.classList.add("aviso"); }, 4000 + (conIntro ? 3500 : 0));
-      setTimeout(() => { if (!cerrado) burbuja.hidden = false; }, 6500 + (conIntro ? 3500 : 0));
-    }
+    // la frase asoma una sola vez, cuando ya se ha leído media página
+    const mira = () => {
+      if (visto || scrollY < (document.documentElement.scrollHeight - innerHeight) * 0.35) return;
+      visto = true; removeEventListener("scroll", mira);
+      try { sessionStorage.setItem(clave, "1"); } catch (e) {}
+      boton.classList.add("dice");
+      setTimeout(() => boton.classList.remove("dice"), 4500);
+    };
+    if (!visto) addEventListener("scroll", mira, { passive: true });
   }
 
   /* ---------- Escaparate de platos (hero de portada) ---------- */
@@ -169,7 +168,7 @@
   /* ---------- Ilustraciones: nunca encima de texto ni de fotos ---------- */
   const decos = $$(".deco");
   if (decos.length) {
-    const SEL = "h1,h2,h3,h4,p,li,a,button,img:not(.deco),dt,dd,label,input,select,textarea,iframe,figure,blockquote,summary,video,canvas,.btn,.goteo,[data-res-svg]";
+    const SEL = ".eyebrow,.precio,.tag,.chip,h1,h2,h3,h4,p,li,a,button,img:not(.deco),dt,dd,label,input,select,textarea,iframe,figure,blockquote,summary,video,canvas,.btn,.goteo,[data-res-svg]";
     const choca = (a, b) => a.left < b.right && a.right > b.left && a.top < b.bottom && a.bottom > b.top;
     const coloca = () => {
       // también cajas con fondo propio (tarjetas, pizarras, mapas…)
@@ -180,12 +179,18 @@
       const cands = $$(SEL).concat(cajas).filter((e) => !e.closest(".wa, .header, .menu-movil, .ticker"));
       decos.forEach((d) => {
         d.classList.remove("oculta");
-        const r = d.getBoundingClientRect(), m = 10, h = r.height || r.width;
+        const r = d.getBoundingClientRect(), m = 16, h = r.height || r.width;
         const caja = { left: r.left - m, right: r.right + m, top: r.top - m, bottom: r.top + h + m };
         const vw = document.documentElement.clientWidth;
         // si queda casi todo fuera de pantalla no aporta nada
         const dentro = Math.min(caja.right, vw) - Math.max(caja.left, 0);
-        const tapa = dentro < r.width * 0.4 || cands.some((e) => { const q = e.getBoundingClientRect(); return q.width > 0 && q.height > 0 && choca(caja, q); });
+        const tapa = dentro < r.width * 0.4 || cands.some((e) => {
+          const q = e.getBoundingClientRect();
+          if (!(q.width > 0 && q.height > 0)) return false;
+          // lo que aún no ha aparecido está 34px más abajo de donde acabará
+          const sube = e.closest(".rv:not(.visto)") ? 34 : 0;
+          return choca(caja, { left: q.left, right: q.right, top: q.top - sube, bottom: q.bottom });
+        });
         d.classList.toggle("oculta", tapa);
       });
     };

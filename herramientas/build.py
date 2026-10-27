@@ -121,12 +121,26 @@ def ticker():
             f'<div class="ticker__pista">{items}<span aria-hidden="true" style="display:contents">{items}</span></div></div>')
 
 
+# subrayado hecho a mano (como una línea de manga pastelera)
+GARABATO = '<svg class="garabato" viewBox="0 0 100 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7c8-5 14 4 22 0s14-5 22 0 14 4 22 0 14-5 22 0 6 2 8 1"/></svg>'
+MENU_EXTRA = {  # ilustración y frase corta del menú móvil
+    "inicio": ("cupcake", "volver a la entrada"),
+    "vitrina": ("red-velvet", "las porciones de hoy"),
+    "encargos": ("manga", "tu tarta, a tu manera"),
+    "meriendas": ("cafe", "café, helados y batidos"),
+    "domicilio": ("brownie", "en casa con Uber Eats"),
+    "historia": ("batidor-espatula", "Paul, Andreina y desde 2019"),
+    "visitanos": ("fresas", "C. Paco Gandía, 26"),
+}
+
+
 def header(clave):
     links = "".join(
-        f'<a href="{h}"{" aria-current=\"page\"" if k == clave else ""}>{c}</a>' for k, h, t, c in NAV[1:]
+        f'<a href="{h}"{" aria-current=\"page\"" if k == clave else ""}><span>{c}</span>{GARABATO}</a>' for k, h, t, c in NAV[1:]
     )
     mm = "".join(
-        f'<a class="mm-link" href="{h}" style="transition-delay:{.12 + i * .05:.2f}s"><small>0{i + 1}</small>{t}</a>'
+        f'<a class="mm-link" href="{h}"{" aria-current=\"page\"" if k == clave else ""} style="transition-delay:{.15 + i * .05:.2f}s">'
+        f'<img src="assets/img/deco/{MENU_EXTRA[k][0]}.webp" alt="" loading="lazy"><span><b>{t}</b><small>{MENU_EXTRA[k][1]}</small></span></a>'
         for i, (k, h, t, c) in enumerate(NAV)
     )
     return f"""
@@ -150,7 +164,9 @@ def header(clave):
   </div>
 </header>
 <div class="menu-movil" id="menu-movil">
-  {mm}
+  <div class="menu-movil__goteo">{goteo(31, gotas=False)}</div>
+  <p class="menu-movil__lema">Endulzamos tu vida</p>
+  <nav class="menu-movil__lista" aria-label="Menú">{mm}</nav>
   <div class="menu-movil__pie">
     <div>C. Paco Gandía, 26 · 41007 Sevilla<br>Martes a domingo · 15:00 a 20:30</div>
     <div class="ctas">
@@ -161,14 +177,14 @@ def header(clave):
 </div>"""
 
 
-WA_MSG = {
-    "inicio": ("¿Te guardamos una porción para esta tarde? Pregúntanos qué hay hoy en la vitrina.", "Hola Chanticream, ¿qué tartas tenéis hoy en la vitrina?"),
-    "vitrina": ("¿Dudas entre dos sabores? Escríbenos y te decimos cuáles quedan ahora mismo.", "Hola, ¿qué sabores os quedan hoy en la vitrina?"),
-    "encargos": ("¿Tienes una celebración? Cuéntanos la fecha y te ayudamos a diseñar tu tarta.", "Hola Chanticream, quería encargar una tarta para el día "),
-    "meriendas": ("¿Te apetece merendar hoy? Pregúntanos por los helados y las tartas del día.", "Hola, ¿qué helados y tartas tenéis hoy?"),
-    "domicilio": ("¿Prefieres recogerlo tú? Escríbenos y te lo dejamos preparado.", "Hola, quería dejar un pedido preparado para recoger en la tienda"),
-    "historia": ("¿Quieres probar las recetas de Paul? Escríbenos y te recomendamos por dónde empezar.", "Hola Chanticream, ¿qué me recomendáis probar primero?"),
-    "visitanos": ("¿No encuentras el local? Te mandamos la ubicación por WhatsApp en un momento.", "Hola, ¿me mandáis la ubicación del local?"),
+WA_MSG = {  # frase corta junto al botón · mensaje que se abre ya escrito
+    "inicio": ("¿Qué hay hoy en la vitrina?", "Hola Chanticream, ¿qué tartas tenéis hoy en la vitrina?"),
+    "vitrina": ("¿Te guardamos una porción?", "Hola, ¿me guardáis una porción para esta tarde?"),
+    "encargos": ("¿Dudas con tu tarta? Escríbenos", "Hola Chanticream, quería encargar una tarta para el día "),
+    "meriendas": ("¿Qué helados hay hoy?", "Hola, ¿qué helados y tartas tenéis hoy?"),
+    "domicilio": ("¿Mejor recogerlo? Escríbenos", "Hola, quería dejar un pedido preparado para recoger en la tienda"),
+    "historia": ("Pregúntanos qué probar", "Hola Chanticream, ¿qué me recomendáis probar primero?"),
+    "visitanos": ("¿Te mandamos la ubicación?", "Hola, ¿me mandáis la ubicación del local?"),
 }
 
 
@@ -243,13 +259,7 @@ def footer(clave="inicio"):
   </div>
 </footer>
 <div class="wa" data-wa="{clave}">
-  <div class="wa__burbuja" role="status" hidden>
-    <button class="wa__x" type="button" aria-label="Cerrar mensaje">×</button>
-    <div class="wa__quien"><img src="assets/img/marca/cupcake.png" alt=""><div><b>Chanticream</b><small><i></i>Responde en unos minutos</small></div></div>
-    <p class="wa__msg">{WA_MSG.get(clave, WA_MSG["inicio"])[0]}</p>
-    <a class="wa__ir" href="{wa_url}" target="_blank" rel="noopener">{ICO['wa']}<span>Escribir por WhatsApp</span></a>
-  </div>
-  <a class="wa-flot" href="{wa_url}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">{ICO['wa']}<em class="wa__aviso" aria-hidden="true">1</em></a>
+  <a class="wa-flot" href="{wa_url}" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp: {WA_MSG.get(clave, WA_MSG["inicio"])[0]}">{ICO['wa']}<span class="wa__tip" aria-hidden="true">{WA_MSG.get(clave, WA_MSG["inicio"])[0]}</span></a>
 </div>
 """
 
