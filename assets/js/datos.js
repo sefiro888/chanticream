@@ -1,0 +1,120 @@
+/* Datos de Chanticream: sacados de su Instagram (@chanticream), Uber Eats y reseñas de Google (octubre 2026). */
+window.CH = {
+  wa: "34699307420",
+  ig: "https://www.instagram.com/chanticream/",
+
+  // Martes a domingo 15:00–20:30, lunes descanso (horario desde el 27/10/2026)
+  horario: { 0: [15 * 60, 20 * 60 + 30], 1: null, 2: [900, 1230], 3: [900, 1230], 4: [900, 1230], 5: [900, 1230], 6: [900, 1230] },
+
+  // ---------- La vitrina ----------
+  categorias: [
+    ["todas", "Todas"],
+    ["queso", "Tartas de queso"],
+    ["capas", "Tartas de capas"],
+    ["pies", "Pies y tartaletas"],
+    ["acento", "Con acento latino"],
+    ["horno", "Bizcochos y horno"],
+    ["especial", "Sin gluten / sin lactosa"],
+  ],
+  tartas: [
+    { n: "Muerte por chocolate", c: ["capas"], d: "Bizcocho de chocolate, trufa y más chocolate. La que más se pide en Uber Eats y la que más se nombra en las reseñas.", img: "carta/tarta-muerte-por-chocolate", t: ["fav"] },
+    { n: "Red Velvet", c: ["capas"], d: "Bizcocho de vainilla con un toque de cacao, teñido de rojo y cubierto con nata y crema de queso.", img: "carta/tarta-red-velvet", t: ["fav"] },
+    { n: "Tarta de zanahoria", c: ["capas"], d: "Bizcocho de zanahoria con buttercream de queso crema. De las más repetidas por los clientes.", img: "carta/tarta-de-zanahoria", t: ["fav"] },
+    { n: "Tres leches", c: ["capas", "acento"], d: "Bizcocho de vainilla empapado en tres leches con merengue y canela. «Tengo a todo el mundo enganchado», dice un cliente.", img: "ig/tres-leches-entera", t: ["fav"] },
+    { n: "Tarta Oreo", c: ["capas"], d: "Capas de bizcocho de chocolate y crema de galleta Oreo. También en versión drip con chuches.", img: "ig/tarta-oreo", t: [] },
+    { n: "Tarta de trufa", c: ["capas"], d: "Chocolate con trufa, intensa y suave a la vez. También en mini tarta.", img: "ig/mini-tarta-trufa", t: [] },
+    { n: "Tarta de la abuela", c: ["capas"], d: "Marquesa de chocolate y galleta, como la de casa. Una de esas que no fallan en un cumpleaños.", img: "ig/tarta-chocolate-drip", t: [] },
+    { n: "Milhojas de fresa", c: ["capas"], d: "Hojaldre crujiente con crema pastelera, nata y fresas. También con dulce de leche.", img: "ig/milhojas-fresa", t: [] },
+    { n: "Cheesecake Lotus", c: ["queso"], d: "Tarta de queso con crema y galleta Lotus. «La mejor tarta de Lotus que he comido», según las reseñas.", img: "carta/cheesecake-lotus", t: ["fav"] },
+    { n: "Cheesecake de dulce de leche", c: ["queso", "acento"], d: "Tarta de queso cremosa con un buen velo de dulce de leche casero.", img: "carta/cheesecake-de-dulce-de-leche", t: [] },
+    { n: "Cheesecake de fresa", c: ["queso"], d: "Suave tarta de queso con cobertura de mermelada de fresa.", img: "carta/cheesecake-de-fresa", t: [] },
+    { n: "Cheesecake Snickers", c: ["queso"], d: "Queso con crema de cacahuete, dulce de leche y chocolate.", img: "carta/cheesecake-snickers", t: [] },
+    { n: "Queso con frutos rojos", c: ["queso"], d: "Base de galleta, crema de queso y una montaña de fresas, frambuesas y arándanos.", img: "ig/cheesecake-frutos-rojos", t: [] },
+    { n: "Queso con pistacho y dátiles", c: ["queso"], d: "Cheesecake gourmet con crema de pistacho y dátiles de elaboración casera.", img: "ig/cheesecake-pistacho", t: [] },
+    { n: "Queso, manzana y caramelo salado", c: ["queso"], d: "Manzana con canela, caramelo salado y nueces tostadas sobre crema de queso.", img: "ig/cheesecake-manzana", t: [] },
+    { n: "Mini cheesecakes", c: ["queso"], d: "Individuales, para darse un capricho: Lotus, Kinder, Oreo, fresa, chocolate o dulce de leche.", img: "reel/mini-kinder", t: [] },
+    { n: "Queso azul con cereza", c: ["queso"], d: "La sorpresa de la vitrina: queso azul con mermelada de cereza y nata. «Inmejorable», dicen.", img: "reel/vitrina-cheesecakes", t: [] },
+    { n: "Pie de limón", c: ["pies"], d: "Base crujiente de galleta, crema de limón que no resulta ácida y merengue tostado.", img: "carta/pie-de-limon", t: ["fav"] },
+    { n: "Pie de maracuyá", c: ["pies", "acento"], d: "Como el de limón, pero con maracuyá. «De lo mejor que he probado en mi vida». Sin gluten por encargo.", img: "ig/pie-limon", t: ["sg"] },
+    { n: "Tarta flan (quesillo)", c: ["pies", "acento"], d: "Bizcocho de vainilla unido a un flan cremoso con caramelo. En Venezuela, torta quesillo.", img: "reel/flan-plato", t: [] },
+    { n: "Tartaleta de frutas", c: ["pies"], d: "Fruta fresca de temporada sobre crema pastelera. Para los días de calor.", img: "ig/tartaleta-frutas", t: [] },
+    { n: "Torta de auyama", c: ["horno", "acento"], d: "Bizcocho de calabaza esponjoso y especiado, con ese olor a recién horneado. El rey del otoño.", img: "ig/bizcocho-calabaza", t: [] },
+    { n: "Bizcocho de piña volteado", c: ["horno"], d: "Rodajas de piña caramelizadas arriba que lo dejan jugoso y brillante.", img: "reel/bizcocho-pina-detalle", t: [] },
+    { n: "Brownie artesanal", c: ["horno"], d: "Denso, de chocolate y con nueces. Perfecto con un café.", img: "ig/brownies", t: [] },
+    { n: "Rollos de canela", c: ["horno"], d: "Solos, con glaseado de queso crema o con topping de chocolate y Oreo.", img: "reel/rollo-chocolate", t: [] },
+    { n: "Cachitos de jamón y bacon", c: ["horno", "acento"], d: "Para quien no quiere dulce: masa de pan rellena de jamón york y bacon. Receta venezolana.", img: "ig/paul-cachitos", t: [] },
+    { n: "Bizcocho de banana y chocolate", c: ["horno", "especial"], d: "Sin gluten y sin lactosa, en porción o entero por encargo.", img: "ig/bizcocho-banana", t: ["sg"] },
+    { n: "Mousse vegana de chocolate", c: ["especial"], d: "Sin gluten, sin lactosa y sin azúcar refinada. Por encargo.", img: "ig/tarta-chocolate-vegana", t: ["sg"] },
+    { n: "Galletas de la casa", c: ["horno"], d: "Grandes, con trozos de chocolate. En el tarro del mostrador.", img: "ig/galletas", t: [] },
+  ],
+
+  // ---------- Pizarra: tarta del día ----------
+  delDia: {
+    2: { n: "Tres leches", d: "Empapada, fría y con canela por encima. La favorita de la casa.", img: "ig/tres-leches-entera" },
+    3: { n: "Pie de limón", d: "Crujiente, cremoso y con el merengue tostado a soplete.", img: "carta/pie-de-limon" },
+    4: { n: "Cheesecake Lotus", d: "Crema de queso, crema Lotus y galleta. Pide dos tenedores.", img: "carta/cheesecake-lotus" },
+    5: { n: "Muerte por chocolate", d: "Para empezar el finde con todo el chocolate del mundo.", img: "carta/tarta-muerte-por-chocolate" },
+    6: { n: "Red Velvet", d: "Roja por fuera, suave por dentro y con su nata de siempre.", img: "carta/tarta-red-velvet" },
+    0: { n: "Tarta de zanahoria", d: "La merienda de domingo perfecta: especiada y con buttercream de queso.", img: "carta/tarta-de-zanahoria" },
+    1: { n: "Hoy descansamos", d: "Los lunes el obrador cierra. Mañana martes, a las 15:00, la vitrina vuelve a estar llena.", img: "reel/vitrina-porcion" },
+  },
+
+  // ---------- Quiz ----------
+  quiz: {
+    preguntas: [
+      { p: "¿Cómo es tu tarde ideal?", o: [["☕", "Café largo y conversación", { lotus: 2, zanahoria: 1 }], ["🍫", "Sofá, peli y chocolate", { chocolate: 2, redvelvet: 1 }], ["☀️", "Terraza y algo fresquito", { limon: 2, tresleches: 1 }]] },
+      { p: "Elige una textura", o: [["🍮", "Cremosa, que se deshace", { tresleches: 2, lotus: 1 }], ["🍰", "Bizcocho esponjoso", { zanahoria: 2, redvelvet: 2 }], ["🥧", "Crujiente con merengue", { limon: 3 }]] },
+      { p: "¿Y de sabor…?", o: [["🍋", "Ácido y alegre", { limon: 2 }], ["🍯", "Dulce de leche y caramelo", { tresleches: 2, lotus: 2 }], ["🫐", "Intenso, sin miedo", { chocolate: 3, redvelvet: 1 }], ["🥕", "Especiado y casero", { zanahoria: 3 }]] },
+    ],
+    resultados: {
+      chocolate: { n: "Muerte por chocolate", d: "Lo tuyo es ir a por todas. Tres capas de chocolate y trufa: la #1 de nuestros clientes en Uber Eats.", img: "carta/tarta-muerte-por-chocolate" },
+      redvelvet: { n: "Red Velvet", d: "Clásica pero con carácter. Bizcocho con un toque de cacao y nata suave: la #2 más pedida.", img: "carta/tarta-red-velvet" },
+      lotus: { n: "Cheesecake Lotus", d: "Cremosa y con ese crujiente de galleta caramelizada. Hay clientes que vienen solo a por ella.", img: "carta/cheesecake-lotus" },
+      tresleches: { n: "Tres leches", d: "Te va lo jugoso. Bizcocho empapado en tres leches, merengue y canela: la más mencionada en Google.", img: "ig/tres-leches-entera" },
+      limon: { n: "Pie de limón", d: "Fresca, alegre y crujiente. Pide también la de maracuyá, que es su hermana tropical.", img: "carta/pie-de-limon" },
+      zanahoria: { n: "Tarta de zanahoria", d: "Hogareña y especiada, con buttercream de queso crema. Un acierto seguro para compartir.", img: "carta/tarta-de-zanahoria" },
+    },
+  },
+
+  // ---------- Reseñas (Google, resumidas) ----------
+  resenas: [
+    { a: "Jose L.", t: "Encargué una muerte por chocolate para un cumpleaños: deliciosa. Y me esperó hasta las 16 h a que saliera de trabajar.", f: "Google" },
+    { a: "Alba T.", t: "Las mejores tartas de Sevilla. Ya las conocíamos cuando estaban en un local pequeñito al lado de casa.", f: "Google" },
+    { a: "Juan Carlos H.", t: "Probamos tres leches, red velvet y biscuit cheesecake. Quedamos encantados. Repetiremos.", f: "Google" },
+    { a: "Luis Alejandro C.", t: "Por tercer año seguido les encargo mi tarta de cumpleaños para la oficina. Todo un acierto.", f: "Google" },
+    { a: "Migue G.", t: "De las mejores tartas de mi vida. Calidad altísima, precios competitivos. La de queso azul, inmejorable.", f: "Google" },
+    { a: "Ana M.", t: "Pedimos maracuyá y zanahoria y nos encantaron tanto que nos llevamos dos porciones más.", f: "Google" },
+    { a: "María C.", t: "Llevo años encargando las tartas de cumple a Paul. Personalizadas súper bonitas. La de Lotus, un espectáculo.", f: "Google" },
+    { a: "Valery M.", t: "Nos hicieron una tarta de Taylor Swift tal como la queríamos, bonita y con un sabor excelente.", f: "Google" },
+    { a: "Nerea R.", t: "Mi pastelería favorita. No empalagan y resalta mucho el sabor. Confié en ellos para mi tarta de boda.", f: "Google" },
+    { a: "Olga R.", t: "Cinco años encargando aquí las tartas de cumpleaños. El cariño de Paul se nota en cada producto.", f: "Google" },
+    { a: "Gustavo M.", t: "La mejor tres leches de toda Sevilla. Encantadores sus dueños.", f: "Google" },
+    { a: "Ignacio D.", t: "La tarta de maracuyá es de lo mejor que he probado. También la hacen sin gluten por encargo.", f: "Google" },
+    { a: "Pablo D.", t: "Siempre me sorprende. La mejor de todas es la de Lotus: no he comido otra mejor.", f: "Google" },
+    { a: "Verónica S.", t: "Lloré la primera vez que probé el pie de limón: me transportó a mi tierra.", f: "Google" },
+    { a: "Tatiane R.", t: "Cuidado al detalle, más rico y bonito imposible. Llevo unos diez años repitiendo y no defraudan.", f: "Google" },
+    { a: "Laura G.", t: "Su mejor marketing es el olor a repostería: incluso cerrado te invade. La de zanahoria, espectacular.", f: "Google" },
+    { a: "Isabel P.", t: "El local es perfecto para merendar con quien más quieres. Súper limpio. ¡Gracias, Paul y Andreina!", f: "Google" },
+    { a: "Tania C.", t: "Calidad brutal y atención inmejorable. Gracias por preparar mi tres leches para llevarla en el avión.", f: "Google" },
+    { a: "Francisco P.", t: "Por la circunstancia de nuestra hija buscaron ingredientes en mil sitios hasta encontrarlos. De 10.", f: "Google" },
+    { a: "Javier B.", t: "Nos prepararon la tarta de boda. Sabor y diseño espectacular, los invitados encantados.", f: "Google" },
+    { a: "Juan P.", t: "Paul, el dueño, todo atención. Me llevé una Red Velvet: probablemente la mejor que he comido.", f: "Google" },
+    { a: "Antonio V.", t: "Increíbles las tartas que hace el señor de la tienda. ¡Qué mano tiene!", f: "Google" },
+    { a: "Elena S.", t: "Hacía mis propias tartas, pero desde que los conocí cuento con ellos sin dudarlo.", f: "Google" },
+    { a: "Alexander D.", t: "Excelente sitio para endulzarse la vida. Buenas instalaciones y tartas bajo pedido para fiestas.", f: "Google" },
+  ],
+
+  // ---------- Instagram ----------
+  insta: [
+    { c: "p/DeuYeEXCI-I", img: "ig/nueva-etapa", alt: "Una nueva etapa en Chanticream" },
+    { c: "reel/Dd_eDxSolLA", img: "ig/paul-obrador", alt: "Paul enseñando lo recién salido del horno" },
+    { c: "reel/DZnJMI8oDmX", img: "ig/terraza-noche", alt: "Noches de verano en la terraza" },
+    { c: "reel/DQZlFwjCHD3", img: "ig/flan-porcion", alt: "Tarta flan casera" },
+    { c: "reel/DQJZ4TeiOrB", img: "ig/pie-limon-porcion", alt: "Así preparamos nuestras tartas" },
+    { c: "reel/DHxtaXsszwN", img: "ig/rollos-canela", alt: "Rollos de canela" },
+    { c: "reel/DIRo3t2sZdU", img: "ig/mini-cheesecake-fresa", alt: "Mini tartas de queso" },
+    { c: "reel/DT5OOFDiHxi", img: "ig/bizcocho-calabaza", alt: "Torta de auyama" },
+    { c: "reel/DKwLlJ5Mlm6", img: "ig/tartaleta-frutas", alt: "Tartas frescas de temporada" },
+    { c: "reel/DJj_GfDMQCz", img: "ig/local-interior", alt: "Nuestra cafetería en Paco Gandía" },
+  ],
+};
