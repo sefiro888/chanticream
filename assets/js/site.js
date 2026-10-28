@@ -100,19 +100,18 @@
   /* ---------- WhatsApp: discreto, con una frase propia de cada página ---------- */
   const wa = $("[data-wa]");
   if (wa) {
-    const boton = $(".wa-flot", wa), clave = `wa-tip-${wa.dataset.wa}`;
+    const boton = $(".wa-flot", wa);
     setTimeout(() => boton.classList.add("ver"), conIntro ? 4600 : 1200);
-    let visto = false;
-    try { visto = sessionStorage.getItem(clave) === "1"; } catch (e) {}
-    // la frase asoma una sola vez, cuando ya se ha leído media página
+    // la frase asoma sola a los pocos segundos y vuelve a esconderse;
+    // si se ha leído media página, se recuerda una vez más
+    const dice = (ms) => { boton.classList.add("dice"); clearTimeout(boton._t); boton._t = setTimeout(() => boton.classList.remove("dice"), ms); };
+    setTimeout(() => dice(9000), conIntro ? 6000 : 3000);
+    let otra = false;
     const mira = () => {
-      if (visto || scrollY < (document.documentElement.scrollHeight - innerHeight) * 0.35) return;
-      visto = true; removeEventListener("scroll", mira);
-      try { sessionStorage.setItem(clave, "1"); } catch (e) {}
-      boton.classList.add("dice");
-      setTimeout(() => boton.classList.remove("dice"), 4500);
+      if (otra || scrollY < (document.documentElement.scrollHeight - innerHeight) * 0.5) return;
+      otra = true; removeEventListener("scroll", mira); dice(6000);
     };
-    if (!visto) addEventListener("scroll", mira, { passive: true });
+    addEventListener("scroll", mira, { passive: true });
   }
 
   /* ---------- Escaparate de platos (hero de portada) ---------- */

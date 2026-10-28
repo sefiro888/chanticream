@@ -712,9 +712,12 @@ fieldset.campo{border:0;padding:0;margin:0 0 26px}
 .wa-flot.ver{opacity:1;transform:none}
 .wa-flot svg{width:28px;height:28px}
 .wa-flot:hover{box-shadow:0 12px 26px -8px rgba(18,140,70,.7),0 1px 3px rgba(0,0,0,.15)}
-.wa__tip{position:absolute;right:calc(100% + 10px);top:50%;translate:0 -50%;white-space:nowrap;pointer-events:none;
-  padding:8px 13px;border-radius:999px;background:var(--nata);color:var(--cacao);font-size:13.5px;font-weight:600;
-  box-shadow:0 6px 18px -8px rgba(46,22,8,.45),0 0 0 1px var(--nata-3);opacity:0;transform:translateX(8px);transition:opacity .35s,transform .45s var(--ease)}
+.wa__tip{position:absolute;right:calc(100% + 12px);top:50%;translate:0 -50%;white-space:nowrap;pointer-events:none;
+  display:flex;align-items:center;gap:7px;padding:8px 13px 8px 11px;border-radius:14px 14px 4px 14px;background:#fff;color:#1c1e21;font-size:13.5px;font-weight:600;
+  box-shadow:0 8px 22px -10px rgba(46,22,8,.5),0 0 0 1px rgba(46,22,8,.06);opacity:0;transform:translateX(10px) scale(.92);transform-origin:right center;
+  transition:opacity .4s,transform .5s cubic-bezier(.3,1.4,.5,1)}
+.wa__tip::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:#25d366;box-shadow:0 0 0 3px rgba(37,211,102,.18)}
+.wa__tip::after{content:"";position:absolute;right:-5px;bottom:7px;width:10px;height:10px;background:#fff;transform:rotate(45deg);border-radius:2px}
 .wa-flot:hover .wa__tip,.wa-flot.dice .wa__tip{opacity:1;transform:none}
 
 /* ---------- Responsive ---------- */
