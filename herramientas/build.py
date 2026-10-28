@@ -188,6 +188,8 @@ WA_MSG = {  # frase corta junto al botón · mensaje que se abre ya escrito
 }
 
 
+URL_WEB = "https://sefiro888.github.io/chanticream/"  # dirección publicada (vistas previas de WhatsApp y redes)
+
 import time
 VERSION = time.strftime("%y%m%d%H%M")
 
@@ -277,10 +279,21 @@ def pagina(meta, cuerpo):
 <meta name="theme-color" content="#2e1608">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Chanticream">
-<meta property="og:title" content="{meta['titulo']}">
-<meta property="og:description" content="{meta['descripcion']}">
-<meta property="og:image" content="{meta.get('og', 'assets/img/hero/vitrina.webp')}">
+<link rel="canonical" href="{URL_WEB}{'' if meta['archivo'] == 'index.html' else meta['archivo']}">
+<meta property="og:url" content="{URL_WEB}{'' if meta['archivo'] == 'index.html' else meta['archivo']}">
+<meta property="og:title" content="{meta.get('og_titulo', meta['titulo'])}">
+<meta property="og:description" content="{meta.get('og_descripcion', meta['descripcion'])}">
+<meta property="og:image" content="{URL_WEB}assets/img/marca/compartir.jpg">
+<meta property="og:image:secure_url" content="{URL_WEB}assets/img/marca/compartir.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo de Chanticream junto a porciones de muerte por chocolate y red velvet">
 <meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{meta.get('og_titulo', meta['titulo'])}">
+<meta name="twitter:description" content="{meta.get('og_descripcion', meta['descripcion'])}">
+<meta name="twitter:image" content="{URL_WEB}assets/img/marca/compartir.jpg">
 <link rel="icon" href="assets/img/marca/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="assets/img/marca/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
